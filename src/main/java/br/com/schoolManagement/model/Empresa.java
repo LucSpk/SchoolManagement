@@ -2,6 +2,8 @@ package br.com.schoolManagement.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,13 +18,15 @@ public class Empresa {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@Column(nullable = false)
 	private String nome;
+	@Column(nullable = false)
 	private String cnpj;
-	@OneToMany
+	@OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
 	private List<Unidade> unidades;
 	
 	public Empresa() {
-		// TODO Auto-generated constructor stub
+
 	}
 	
 	public Empresa(String nome, String cnpj) {

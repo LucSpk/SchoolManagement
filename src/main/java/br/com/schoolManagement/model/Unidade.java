@@ -1,5 +1,7 @@
 package br.com.schoolManagement.model;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,18 +17,21 @@ public class Unidade {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@Column(length = 255)
+	private String nome;
 	@ManyToOne
 	private Empresa empresa;
-	@OneToOne
+	@OneToOne(mappedBy = "unidade", cascade = CascadeType.ALL)
 	private Endereco endereco;
 	
 	public Unidade() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Unidade(Empresa empresa) {
+	public Unidade(String nome, Endereco endereco) {
 		super();
-		this.empresa = empresa;
+		this.nome = nome;
+		this.endereco = endereco;
 	}
 
 	public Long getId() {
@@ -36,11 +41,25 @@ public class Unidade {
 		this.id = id;
 	}
 	
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	
 	public Empresa getEmpresa() {
 		return empresa;
 	}
 	public void setEmpresa(Empresa empresa) {
 		this.empresa = empresa;
+	}
+	
+	public Endereco getEndereco() {
+		return endereco;
+	}
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
 	}
 	
 }

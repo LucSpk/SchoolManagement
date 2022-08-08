@@ -1,5 +1,6 @@
 package br.com.schoolManagement.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,21 +17,25 @@ public class Endereco {
 	private Long id;
 	@OneToOne
 	private Unidade unidade;
+	@Column(length = 255, nullable = false)
 	private String logradouro;
+	@Column(length = 15,nullable = false)
 	private String numero;
+	@Column(length = 150,nullable = false)
 	private String bairro;
+	@Column(length = 150, nullable = false)
 	private String cidade;
+	@Column(length = 2, nullable = false)
 	private String estado;
+	@Column(length = 10, nullable = false)
 	private String cep;
 	
 	public Endereco() {
 		
 	}
 
-	public Endereco(Unidade unidade, String logradouro, String numero, String bairro, String cidade, String estado,
-			String cep) {
+	public Endereco(String logradouro, String numero, String bairro, String cidade, String estado, String cep) {
 		super();
-		this.unidade = unidade;
 		this.logradouro = logradouro;
 		this.numero = numero;
 		this.bairro = bairro;
