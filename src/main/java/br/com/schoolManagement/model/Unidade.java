@@ -22,7 +22,7 @@ public class Unidade {
 	@Column(length = 255)
 	private String nome;
 	
-	@ManyToOne
+	@ManyToOne()
 	@JoinColumn(name = "empresa_id")
 	private Empresa empresa;
 	
@@ -31,7 +31,7 @@ public class Unidade {
 	private Endereco endereco;
 	
 	public Unidade() {
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 	public Unidade(String nome, Endereco endereco) {
