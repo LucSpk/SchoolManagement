@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 import br.com.schoolManagement.dao.EmpresaDAO;
+import br.com.schoolManagement.dao.UnidadeDAO;
 import br.com.schoolManagement.model.Empresa;
 import br.com.schoolManagement.model.Endereco;
 import br.com.schoolManagement.model.Unidade;
@@ -18,16 +19,37 @@ public class TestApp {
 		EntityManager em = JpaUtil.getEntityManager();
 		
 		EmpresaDAO empresaDAO = new EmpresaDAO(em);
+		UnidadeDAO unidadeDAO = new UnidadeDAO(em);
+
 		Empresa empresa01 = new Empresa("EmpresaEmpresa", "12345678901325");
+
 		
 		List<Unidade> unidades = new ArrayList<>();
 		unidades.addAll(criaUnidades());
+		
+		Endereco endUnidade03 =new Endereco(
+						"Rua do retorno", 
+						"123", 
+						"Tufao", 
+						"Cidade 03", 
+						"BH", 
+						"61234-765");
+		
+		Unidade unidade03 = new Unidade("Unidade 03", endUnidade03);
+		unidade03.setEmpresa(empresa01);
 		
 		empresa01.setUnidades(unidades);
 		
 		em.getTransaction().begin();
 		
 		empresaDAO.cadastrar(empresa01);
+		
+		/*
+		List<Unidade> empresaPorId = unidadeDAO.consultaPorId(1);
+		Empresa empresa = empresaPorId.get(0).getEmpresa();
+		unidade03.setEmpresa(empresa);;
+		unidadeDAO.cadastrar(unidade03);
+		*/
 		
 		em.getTransaction().commit();
 		
