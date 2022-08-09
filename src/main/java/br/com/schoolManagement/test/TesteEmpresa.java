@@ -25,7 +25,4 @@ public class TesteEmpresa {
 		em.close();
 	}
 	
-	private static void commitTransaction() {
-		
-	}
 }

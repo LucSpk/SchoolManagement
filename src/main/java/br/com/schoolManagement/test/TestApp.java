@@ -18,7 +18,6 @@ public class TestApp {
 		EntityManager em = JpaUtil.getEntityManager();
 		
 		EmpresaDAO empresaDAO = new EmpresaDAO(em);
-		
 		Empresa empresa01 = new Empresa("EmpresaEmpresa", "12345678901325");
 		
 		List<Unidade> unidades = new ArrayList<>();
@@ -31,7 +30,7 @@ public class TestApp {
 		empresaDAO.cadastrar(empresa01);
 		
 		em.getTransaction().commit();
-			
+		
 		em.close();
 	}
 	
@@ -47,7 +46,7 @@ public class TestApp {
 		
 		unidades.add(unidade01);
 		unidades.add(unidade02);
-		
+			
 		return unidades;
 	}
 }

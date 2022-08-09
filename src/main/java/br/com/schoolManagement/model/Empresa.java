@@ -1,5 +1,6 @@
 package br.com.schoolManagement.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -18,12 +19,15 @@ public class Empresa {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	@Column(nullable = false)
 	private String nome;
+	
 	@Column(nullable = false)
 	private String cnpj;
+	
 	@OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
-	private List<Unidade> unidades;
+	private List<Unidade> unidades = new ArrayList<>() ;
 	
 	public Empresa() {
 
@@ -60,6 +64,11 @@ public class Empresa {
 		return unidades;
 	}
 	public void setUnidades(List<Unidade> unidades) {
+		
+		for(Unidade unidade : unidades ) {
+			unidade.setEmpresa(this);
+		}
+		
 		this.unidades = unidades;
 	}
 		

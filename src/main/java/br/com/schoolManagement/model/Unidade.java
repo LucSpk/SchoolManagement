@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -17,11 +18,16 @@ public class Unidade {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	@Column(length = 255)
 	private String nome;
+	
 	@ManyToOne
+	@JoinColumn(name = "empresa_id")
 	private Empresa empresa;
-	@OneToOne(mappedBy = "unidade", cascade = CascadeType.ALL)
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "endereco_id")
 	private Endereco endereco;
 	
 	public Unidade() {
