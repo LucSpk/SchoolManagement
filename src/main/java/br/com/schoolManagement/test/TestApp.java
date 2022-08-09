@@ -3,42 +3,22 @@ package br.com.schoolManagement.test;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.EntityManager;
-
-import br.com.schoolManagement.dao.EmpresaDAO;
-import br.com.schoolManagement.model.Empresa;
+import br.com.schoolManagement.controler.CursoController;
+import br.com.schoolManagement.controler.UnidadeController;
+import br.com.schoolManagement.model.Curso;
 import br.com.schoolManagement.model.Endereco;
 import br.com.schoolManagement.model.Unidade;
-import br.com.schoolManagement.utils.JpaUtil;
 
 public class TestApp {
 
 	public static void main(String[] args) {
-
-		Empresa empresa01 = new Empresa("EmpresaEmpresa", "12345678901325");
-
-		List<Unidade> unidades = new ArrayList<>();
-		unidades.addAll(criaUnidades());
 		
-		empresa01.setUnidades(unidades);
+		Curso curso = new Curso("Geometria");
 		
-		persistDAO(empresa01);
+		CursoController.cadastraCurso(curso, UnidadeController.getUnidadeById(1));
 	}
 	
-	private static void persistDAO(Object entidade ) {
-		EntityManager em = JpaUtil.getEntityManager();
-		
-		EmpresaDAO empresaDAO = new EmpresaDAO(em);
-		//UnidadeDAO unidadeDAO = new UnidadeDAO(em);
-		
-		em.getTransaction().begin();
-		
-		empresaDAO.cadastrar((Empresa) entidade);
-		
-		em.getTransaction().commit();
-		em.close();
-	}
-	
+	@SuppressWarnings("unused")
 	private static List<Unidade> criaUnidades() {
 		
 		List<Unidade> unidades = new ArrayList<>();
@@ -58,5 +38,28 @@ public class TestApp {
 			
 		return unidades;
 	}
-
+		
 }
+
+
+/*
+ * 
+ 		EntityManager em = JpaUtil.getEntityManager();
+		
+		EmpresaDAO empresaDAO = new EmpresaDAO(em);
+		UnidadeDAO unidadeDAO = new UnidadeDAO(em);
+		
+		Endereco endUnidade03 =new Endereco("Rua do retorno", "123", "Tufao", "Cidade 03", "BH", "61234-765");
+		Unidade unidade03 = new Unidade("Unidade 03", endUnidade03);
+		
+		em.getTransaction().begin();
+		
+		Empresa empresa = empresaDAO.getById(1);
+		
+		unidade03.setEmpresa(empresa);
+		
+		unidadeDAO.cadastrar(unidade03);
+		
+		em.getTransaction().commit();
+		em.close(); 
+ */
