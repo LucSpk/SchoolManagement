@@ -4,9 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import br.com.schoolManagement.dao.CursoDAO;
 import br.com.schoolManagement.dao.PeriodoDAO;
-import br.com.schoolManagement.model.Curso;
 import br.com.schoolManagement.model.Periodo;
 import br.com.schoolManagement.utils.JpaUtil;
 
@@ -14,14 +12,9 @@ public class PeriodoController {
 
 // -- Create
 	
-	public static void create(long curso_id, Periodo periodo) {
+	public static void create(Periodo periodo) {
 		EntityManager em = JpaUtil.getEntityManager();
 		PeriodoDAO periododDAO = new PeriodoDAO(em);
-		CursoDAO cursoDAO = new CursoDAO(em);
-		
-		Curso curso = cursoDAO.getById(curso_id);
-		
-		periodo.setCurso(curso);
 		
 		em.getTransaction().begin();
 		
@@ -31,10 +24,12 @@ public class PeriodoController {
 		em.close();
 	}
 	
-	public static void createMany(long curso_id, List<Periodo> periodos) {
+	public static void createMany(List<Periodo> periodos) {
 		for(Periodo periodo: periodos)
-			create(curso_id, periodo);
+			create(periodo);
 	}
+	
+	
 	
 // -- Read
 

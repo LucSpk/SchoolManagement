@@ -24,11 +24,11 @@ public class Curso {
 	@Column(nullable = false)
 	private String nome;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(mappedBy = "cursos", cascade = CascadeType.ALL)
 	private List<Unidade> unidades = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "curso")
-	private List<Periodo> periodos = new ArrayList<>();
+	private List<Disciplina> disciplinas = new ArrayList<>();
 	
 	public Curso() {
 		// TODO Auto-generated constructor stub
@@ -70,14 +70,14 @@ public class Curso {
 		this.unidades.add(unidade);
 	}
 	
-	public List<Periodo> getPeriodos() {
-		return periodos;
+	public List<Disciplina> getDisciplinas() {
+		return disciplinas;
 	}
-	public void setPeriodos(List<Periodo> periodos) {
-		this.periodos = periodos;
+	public void setDisciplinas(List<Disciplina> disciplinas) {
+		this.disciplinas = disciplinas;
 	}
-	public void setPeriodo(Periodo periodos) {
-		this.periodos.add(periodos);
+	public void setDisciplina(Disciplina disciplina) {
+		this.disciplinas.add(disciplina);
 	}
 	
 	@Override

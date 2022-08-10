@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import br.com.schoolManagement.dao.CursoDAO;
 import br.com.schoolManagement.dao.UnidadeDAO;
 import br.com.schoolManagement.model.Curso;
+import br.com.schoolManagement.model.Disciplina;
 import br.com.schoolManagement.model.Periodo;
 import br.com.schoolManagement.model.Unidade;
 import br.com.schoolManagement.utils.JpaUtil;
@@ -37,18 +38,17 @@ public class CursoController {
 			create(unidade_id, curso);
 	}
 	
-	public static void createCursoAndPeriodos(long unidade_id, Curso curso, List<Periodo> periodos) {
-		curso.setPeriodos(periodos);
+	public static void createCursoAndDisciplinas(long unidade_id, Curso curso, List<Disciplina> disciplinas) {
+		curso.setDisciplinas(disciplinas);
 		create(unidade_id, curso);
 	}
 	
-	public static void createPeriodo(long curso_id, Periodo periodo) {	
+	public static void createDisciplina(long curso_id, Disciplina disciplina) {	
 		
 	}
 	
-	public static void createManyPeriodos(long curso_id, List<Periodo> periodos) {	
-		for(Periodo periodo: periodos) 
-			createPeriodo(curso_id, periodo);
+	public static void createManyDisciplinas(long curso_id, List<Periodo> periodos) {	
+
 	}
 	
 // -- Reade

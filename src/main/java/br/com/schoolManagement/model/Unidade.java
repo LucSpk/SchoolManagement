@@ -34,7 +34,7 @@ public class Unidade {
 	@JoinColumn(name = "endereco_id")
 	private Endereco endereco;
 	
-	@ManyToMany(mappedBy = "unidades", cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.ALL)
 	private List<Curso> cursos = new ArrayList<>();
 	
 	public Unidade() {

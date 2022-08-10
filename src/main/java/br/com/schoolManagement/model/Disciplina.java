@@ -1,19 +1,16 @@
 package br.com.schoolManagement.model;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "periodos")
-public class Periodo {
+@Table(name = "disciplinas")
+public class Disciplina {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,16 +19,23 @@ public class Periodo {
 	@Column(nullable = false)
 	private String nome;
 	
-	@OneToMany(mappedBy = "periodo", cascade = CascadeType.ALL)
-	private List<Disciplina> disciplinas;
+	@ManyToOne
+	private Curso curso;
 	
-	public Periodo() {
-
-	}
+	@ManyToOne
+	private Periodo periodo;
 	
-	public Periodo(String nome) {
+	public Disciplina() {	}
+	
+	public Disciplina(String nome) {
 		super();
 		this.nome = nome;
+	}
+	
+	public Disciplina(String nome, Curso curso) {
+		super();
+		this.nome = nome;
+		this.curso = curso;
 	}
 
 	public Long getId() {
@@ -47,15 +51,19 @@ public class Periodo {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
+	public Curso getCurso() {
+		return curso;
+	}
+	public void setCurso(Curso curso) {
+		this.curso = curso;
+	}
 	
-	public List<Disciplina> getDisciplinas() {
-		return disciplinas;
+	public Periodo getPeriodo() {
+		return periodo;
 	}
-	public void setDisciplinas(List<Disciplina> disciplinas) {
-		this.disciplinas = disciplinas;
-	}
-	public void setDisciplina(Disciplina disciplina) {
-		this.disciplinas.add(disciplina);
+	public void setPeriodo(Periodo periodo) {
+		this.periodo = periodo;
 	}
 	
 }

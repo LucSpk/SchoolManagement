@@ -5,11 +5,10 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 import br.com.schoolManagement.model.Periodo;
-import br.com.schoolManagement.model.Unidade;
 
 public class PeriodoDAO {
 
-private EntityManager em;
+	private EntityManager em;
 	
 	public PeriodoDAO(EntityManager em) {
 		this.em = em;
@@ -39,11 +38,6 @@ private EntityManager em;
 		return em.find(Periodo.class, id);
 	}
 	
-	public void findPeriodosByCursoId(long id) {
-		
-	}
-	
-	public Unidade getUnidade(long id) {
-		return null;
-	}
+// -- Alter
+
 }
