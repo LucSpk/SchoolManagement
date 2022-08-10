@@ -1,5 +1,6 @@
 package br.com.schoolManagement.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -8,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -23,7 +25,10 @@ public class Periodo {
 	private String nome;
 	
 	@OneToMany(mappedBy = "periodo", cascade = CascadeType.ALL)
-	private List<Disciplina> disciplinas;
+	private List<Disciplina> disciplinas = new ArrayList<>();
+	
+	@ManyToMany(mappedBy = "periodos")
+	private List<Aluno> alunos = new ArrayList<>();
 	
 	public Periodo() {
 
@@ -58,4 +63,13 @@ public class Periodo {
 		this.disciplinas.add(disciplina);
 	}
 	
+	public List<Aluno> getAlunos() {
+		return alunos;
+	}
+	public void setAlunos(List<Aluno> alunos) {
+		this.alunos = alunos;
+	}
+	public void setAluno(Aluno aluno) {
+		this.alunos.add(aluno);
+	}
 }

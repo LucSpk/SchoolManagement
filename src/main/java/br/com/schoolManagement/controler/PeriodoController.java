@@ -39,12 +39,12 @@ public class PeriodoController {
 		
 		em.getTransaction().begin();
 		
-		List<Periodo> periodo = periododDAO.findAll();
+		List<Periodo> periodos = periododDAO.findAll();
 		
 		em.getTransaction().commit();
 		em.close();
 	
-		return periodo;
+		return periodos;
 	}
 	
 	public static Periodo getById(long id) {

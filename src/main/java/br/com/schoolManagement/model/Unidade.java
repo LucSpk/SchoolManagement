@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -35,7 +36,11 @@ public class Unidade {
 	private Endereco endereco;
 	
 	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "referencia_curso")
 	private List<Curso> cursos = new ArrayList<>();
+	
+	@ManyToMany
+	private List<Professor> professores = new ArrayList<>();
 	
 	public Unidade() {
 		
@@ -79,16 +84,21 @@ public class Unidade {
 	public List<Curso> getCursos() {
 		return cursos;
 	}
-	public void setCursos(List<Curso> cursos) {
-		
-		for(Curso curso : cursos ) {
-			curso.setUnidade(this);
-		}
-		
+	public void setCursos(List<Curso> cursos) {	
 		this.cursos = cursos;
 	}
 	public void setCurso(Curso curso) {
 		this.cursos.add(curso);
+	}
+	
+	public List<Professor> getProfessores() {
+		return professores;
+	}
+	public void setProfessores(List<Professor> professores) {
+		this.professores = professores;
+	}
+	public void setProfessore(Professor professore) {
+		this.professores.add(professore);
 	}
 	
 	@Override

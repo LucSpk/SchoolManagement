@@ -30,6 +30,9 @@ public class Curso {
 	@OneToMany(mappedBy = "curso")
 	private List<Disciplina> disciplinas = new ArrayList<>();
 	
+	@ManyToMany(mappedBy = "cursos")
+	private List<Aluno> alunos = new ArrayList<>();
+	
 	public Curso() {
 		// TODO Auto-generated constructor stub
 	}
@@ -79,6 +82,17 @@ public class Curso {
 	public void setDisciplina(Disciplina disciplina) {
 		this.disciplinas.add(disciplina);
 	}
+	
+	public List<Aluno> getAlunos() {
+		return alunos;
+	}
+	public void setAlunos(List<Aluno> alunos) {
+		this.alunos = alunos;
+	}
+	public void setAluno(Aluno aluno) {
+		this.alunos.add(aluno);	
+	}
+	
 	
 	@Override
 	public String toString() {
