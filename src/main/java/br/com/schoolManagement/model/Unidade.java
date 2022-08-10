@@ -1,5 +1,6 @@
 package br.com.schoolManagement.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -34,16 +35,17 @@ public class Unidade {
 	private Endereco endereco;
 	
 	@ManyToMany(mappedBy = "unidades", cascade = CascadeType.ALL)
-	private List<Curso> cursos;
+	private List<Curso> cursos = new ArrayList<>();
 	
 	public Unidade() {
 		
 	}
 	
-	public Unidade(String nome, Endereco endereco) {
+	public Unidade(String nome, Endereco endereco, Empresa empresa) {
 		super();
 		this.nome = nome;
 		this.endereco = endereco;
+		this.empresa = empresa;
 	}
 
 	public Long getId() {
@@ -85,7 +87,6 @@ public class Unidade {
 		
 		this.cursos = cursos;
 	}
-	
 	public void setCurso(Curso curso) {
 		this.cursos.add(curso);
 	}

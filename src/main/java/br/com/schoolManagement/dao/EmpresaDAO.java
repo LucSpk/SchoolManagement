@@ -14,24 +14,30 @@ public class EmpresaDAO {
 	public EmpresaDAO(EntityManager em) {
 		this.em = em;
 	}
+	
+// -- Creat	
 
 	public void cadastrar(Empresa empresa) {
 		this.em.persist(empresa);
 	}
+
+// -- Delete
 	
 	public void remover(Empresa empresa) {
 		this.em.remove(this.em.merge(empresa));
 	}
 	
-	public Empresa getById(long id) {
-		return em.find(Empresa.class, id);
-	}
+// -- Read	
 	
 	@SuppressWarnings("unchecked")
 	public List<Empresa> findAll(){
-        String query = "select e From Empresa e";
-        return this.em.createQuery(query).getResultList();
-    }
+		String query = "select e From Empresa e";
+		return this.em.createQuery(query).getResultList();
+	}	
+	
+	public Empresa getById(long id) {
+		return em.find(Empresa.class, id);
+	}
 	
 	public List<Unidade> findUnidadeByEmpresaId(long id){
         String query = "select u From Unidade u WHERE u.empresa.id = :id";
@@ -40,5 +46,7 @@ public class EmpresaDAO {
         		.setParameter("id", id)
         		.getResultList();
     }
+	
+// -- Edit
 	
 }

@@ -12,7 +12,9 @@ import br.com.schoolManagement.utils.JpaUtil;
 
 public class EmpresaController {
 	
-	public static void cadastraEmpresa(Empresa empresa) {
+// -- Create
+	
+	public static void create(Empresa empresa) {
 		EntityManager em = JpaUtil.getEntityManager();
 		EmpresaDAO empresaDAO = new EmpresaDAO(em);
 		
@@ -24,21 +26,19 @@ public class EmpresaController {
 		em.close();
 	}
 	
-	public static void cadastraEmpresaAndUnidades(Empresa empresa, List<Unidade> unidades) {
-		EntityManager em = JpaUtil.getEntityManager();
-		EmpresaDAO empresaDAO = new EmpresaDAO(em);
-		
+	public static void createMany(List<Empresa> empresas) {		
+		for(Empresa empresa : empresas) 
+			create(empresa);
+	}
+	
+	public static void createAndUnidades(Empresa empresa, List<Unidade> unidades) {
 		empresa.setUnidades(unidades);
-		
-		em.getTransaction().begin();
-		
-		empresaDAO.cadastrar(empresa);
-		
-		em.getTransaction().commit();
-		em.close();
+		create(empresa);
 	}
 	
-	public static List<Empresa> getEmpresas() {
+// -- Read
+	
+	public static List<Empresa> getAll() {
 		EntityManager em = JpaUtil.getEntityManager();
 		EmpresaDAO empresaDAO = new EmpresaDAO(em);
 		
@@ -50,10 +50,9 @@ public class EmpresaController {
 		em.close();
 		
 		return empresas;
-		
 	}
 	
-	public static Empresa getEmpresaById(long id) {
+	public static Empresa getById(long id) {
 		EntityManager em = JpaUtil.getEntityManager();
 		EmpresaDAO empresaDAO = new EmpresaDAO(em);
 		
@@ -81,6 +80,9 @@ public class EmpresaController {
 		em.close();
 		
 		return unidades;
-		
 	}
+	
+// -- Edit
+
+// -- Delete	
 }

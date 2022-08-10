@@ -71,7 +71,6 @@ public class Empresa {
 		
 		this.unidades = unidades;
 	}
-	
 	public void setUnidade(Unidade unidade) {
 		this.unidades.add(unidade);
 	}
