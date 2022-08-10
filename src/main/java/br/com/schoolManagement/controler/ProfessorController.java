@@ -4,18 +4,18 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import br.com.schoolManagement.dao.AlunoDAO;
-import br.com.schoolManagement.model.Aluno;
+import br.com.schoolManagement.dao.ProfessorDAO;
+import br.com.schoolManagement.model.Professor;
 import br.com.schoolManagement.utils.JpaUtil;
 
-public class AlunoController {
-
-// -- Create
+public class ProfessorController {
 	
+// -- Create
+
 	@SuppressWarnings("unused")
-	public static void create(Aluno aluno) {
+	public static void create(Professor professor) {
 		EntityManager em = JpaUtil.getEntityManager();
-		AlunoDAO alunoDAO = new AlunoDAO(em);
+		ProfessorDAO professorDAO = new ProfessorDAO(em);
 		
 		em.getTransaction().begin();
 		
@@ -25,39 +25,39 @@ public class AlunoController {
 		em.close();
 	}
 	
-	public static void createMany(List<Aluno> alunos) {
-		for(Aluno aluno: alunos)
-			create(aluno);
+	public static void createMany(List<Professor> professores) {
+		for(Professor professor: professores)
+			create(professor);
 	}
 	
 // -- Read
 
-	public static List<Aluno> getUnidades() {
+	public static List<Professor> getUnidades() {
 		EntityManager em = JpaUtil.getEntityManager();
-		AlunoDAO alunoDAO = new AlunoDAO(em);
+		ProfessorDAO professorDAO = new ProfessorDAO(em);
 		
 		em.getTransaction().begin();
 		
-		List<Aluno> alunos = alunoDAO.findAll();
+		List<Professor> professores = professorDAO.findAll();
 		
 		em.getTransaction().commit();
 		em.close();
 	
-		return alunos;
+		return professores;
 	}
 	
-	public static Aluno getById(long id) {
+	public static Professor getById(long id) {
 		EntityManager em = JpaUtil.getEntityManager();
-		AlunoDAO alunoDAO = new AlunoDAO(em);
+		ProfessorDAO professorDAO = new ProfessorDAO(em);
 		
 		em.getTransaction().begin();
 		
-		Aluno aluno = alunoDAO.getById(id);
+		Professor professor = professorDAO.getById(id);
 		
 		em.getTransaction().commit();
 		em.close();
 	
-		return aluno;
+		return professor;
 	}
 	
 	public static void getCursosByUnidade() {
