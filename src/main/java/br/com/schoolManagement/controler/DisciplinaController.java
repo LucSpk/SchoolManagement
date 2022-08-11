@@ -22,7 +22,7 @@ public class DisciplinaController {
 			DisciplinaDAO disciplinaDAO = new DisciplinaDAO(em);
 			PeriodoDAO periododDAO = new PeriodoDAO(em);
 			
-			Curso curso = cursoDAO.getById(curso_id);
+			Curso curso = cursoDAO.getByIdDAO(curso_id);
 			Periodo periodo = periododDAO.getById(periodo_id);
 			
 			disciplina.setCurso(curso);
@@ -34,19 +34,17 @@ public class DisciplinaController {
 			
 			em.getTransaction().commit();
 			em.close();
-		}
-		
+		}	
 		public static void createMany(long curso_id, List<Disciplina> disciplinas, long periodo_id) {
 			for(Disciplina disciplina: disciplinas)
 				create(curso_id, disciplina, periodo_id);
 		}
-		
 		public static void createDisciplinaAndPeriodo(long curso_id, List<Disciplina> disciplinas, Periodo periodo) {
 			EntityManager em = JpaUtil.getEntityManager();
 			CursoDAO cursoDAO = new CursoDAO(em);
 			DisciplinaDAO disciplinaDAO = new DisciplinaDAO(em);
 			
-			Curso curso = cursoDAO.getById(curso_id);
+			Curso curso = cursoDAO.getByIdDAO(curso_id);
 			
 			em.getTransaction().begin();
 			
@@ -59,8 +57,6 @@ public class DisciplinaController {
 			
 			em.getTransaction().commit();
 			em.close();
-			
-			
 		}
 		
 	// -- Read
@@ -78,7 +74,6 @@ public class DisciplinaController {
 			
 			return disciplinas;
 		}
-		
 		public static Disciplina getById(long id) {
 			EntityManager em = JpaUtil.getEntityManager();
 			DisciplinaDAO disciplinaDAO = new DisciplinaDAO(em);
@@ -92,7 +87,6 @@ public class DisciplinaController {
 			
 			return disciplina;
 		}
-		
 		public static void getCursosByUnidade() {
 			
 		}
@@ -101,7 +95,7 @@ public class DisciplinaController {
 		
 		}
 		
-	// -- Edit
+	// -- Update
 		
 	// -- Delete
 	

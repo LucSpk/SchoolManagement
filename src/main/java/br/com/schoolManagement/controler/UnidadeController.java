@@ -8,6 +8,8 @@ import br.com.schoolManagement.dao.EmpresaDAO;
 import br.com.schoolManagement.dao.UnidadeDAO;
 import br.com.schoolManagement.model.Curso;
 import br.com.schoolManagement.model.Empresa;
+import br.com.schoolManagement.model.Endereco;
+import br.com.schoolManagement.model.Professor;
 import br.com.schoolManagement.model.Unidade;
 import br.com.schoolManagement.utils.JpaUtil;
 
@@ -100,15 +102,19 @@ public class UnidadeController {
 		
 		Unidade unidade = unidadeDAO.getByIdDAO(unidade_id);
 		
-		em.getTransaction().begin();
-		
 		Empresa empresa = unidade.getEmpresa();
 		
-		em.getTransaction().commit();
-		em.close();
-		JpaUtil.closeEntityManagerFactory();
-		
 		return empresa;
+	}
+	public static Endereco getEnderecoByUnidadeId(long unidade_id) {
+		EntityManager em = JpaUtil.getEntityManager();
+		UnidadeDAO unidadeDAO = new UnidadeDAO(em);
+		
+		Unidade unidade = unidadeDAO.getByIdDAO(unidade_id);
+		
+		Endereco endereco = unidade.getEndereco();
+		
+		return endereco;
 	}
 	public static List<Curso> getCursosByUnidadeId(long unidade_id) {
 		EntityManager em = JpaUtil.getEntityManager();
@@ -117,7 +123,18 @@ public class UnidadeController {
 		Unidade unidade = unidadeDAO.getByIdDAO(unidade_id);
 		
 		List<Curso> cursos = unidade.getCursos();
+		
 		return cursos;
+	}
+	public static List<Professor> getProfessorByUnidadeId(long unidade_id) {
+		EntityManager em = JpaUtil.getEntityManager();
+		UnidadeDAO unidadeDAO = new UnidadeDAO(em);
+
+		Unidade unidade = unidadeDAO.getByIdDAO(unidade_id);
+		
+		List<Professor> professores = unidade.getProfessores();
+		
+		return professores;
 	}
 	
 // -- Update
@@ -139,7 +156,8 @@ public class UnidadeController {
 		JpaUtil.closeEntityManagerFactory();
 	
 	}
-// -- Delete
+
+	// -- Delete
 	
 	public static void deleteByID(long unidade_id) {
 		EntityManager em = JpaUtil.getEntityManager();

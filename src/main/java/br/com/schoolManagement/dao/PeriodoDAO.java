@@ -20,24 +20,34 @@ public class PeriodoDAO {
 		this.em.persist(periodo);
 	}
 	
-// -- Delete	
-	
-	public void remover(Periodo periodo) {
-		this.em.remove(this.em.merge(periodo));
-	}
-	
 // -- Reade	
 	
+	public Periodo getById(long id) {
+		return em.find(Periodo.class, id);
+	}
 	@SuppressWarnings("unchecked")
 	public List<Periodo> findAll() {
         String query = "select p From Periodo p";
         return this.em.createQuery(query).getResultList();
     }
+
+// -- Update
 	
-	public Periodo getById(long id) {
-		return em.find(Periodo.class, id);
+	public void updateDAO(long id, Periodo periodo) {
+		String query = "UPDATE Periodo p "
+				+ "SET p.nome = :name "
+				+ "WHERE p.id = :id";
+		this.em
+			.createQuery(query)
+			.setParameter("name", periodo.getNome())
+			.setParameter("id", id)
+			.executeUpdate();	
 	}
 	
-// -- Alter
+// -- Delete	
 
+	public void remover(Periodo periodo) {
+		this.em.remove(this.em.merge(periodo));
+	}
+	
 }

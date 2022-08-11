@@ -20,32 +20,34 @@ private EntityManager em;
 		this.em.persist(professor);
 	}
 	
-// -- Delete	
-	
-	public void remover(Professor professor) {
-		this.em.remove(this.em.merge(professor));
-	}
-	
-	// -- Read	
+// -- Read	
 
+	public Professor getById(long id) {
+		return em.find(Professor.class, id);
+	}
 	@SuppressWarnings("unchecked")
 	public List<Professor> findAll(){
 		String query = "select p From Professor p";
 		return this.em.createQuery(query).getResultList();
 	}
 	
-	public Professor getById(long id) {
-		return em.find(Professor.class, id);
-	}
+// -- Update	
 
-	public List<Professor> findAllAlunosByCursoId(long id) {
-		return null;
+	public void updateDAO(long id, Professor professor) {
+		String query = "UPDATE Professor p "
+				+ "SET p.nome = :name , "						
+				+ "WHERE p.id = :id";
+		this.em
+			.createQuery(query)
+			.setParameter("name", professor.getNome())
+			.setParameter("id", id)
+			.executeUpdate();	
 	}
 	
-	public Professor getCurso(long id) {
-		return null;
+// -- Delete	
+
+	public void remover(Professor professor) {
+		this.em.remove(this.em.merge(professor));
 	}
 	
-// -- Alter	
-
 }

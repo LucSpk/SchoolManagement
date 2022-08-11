@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 import br.com.schoolManagement.model.Empresa;
-import br.com.schoolManagement.model.Unidade;
 
 public class EmpresaDAO {
 	
@@ -32,13 +31,6 @@ public class EmpresaDAO {
 		String query = "select e From Empresa e";
 		return this.em.createQuery(query).getResultList();
 	}	
-	public List<Unidade> findUnidadeByEmpresaIdDAO(long id){
-        String query = "select u From Unidade u WHERE u.empresa.id = :id";
-        return this.em
-        		.createQuery(query, Unidade.class)
-        		.setParameter("id", id)
-        		.getResultList();
-    }
 	
 // -- Update
 	

@@ -59,7 +59,7 @@ public class CursoController {
 		
 		em.getTransaction().begin();
 		
-		List<Curso> cursos = cursoDAO.findAll();
+		List<Curso> cursos = cursoDAO.findAllDAO();
 		
 		em.getTransaction().commit();
 		em.close();
@@ -73,7 +73,7 @@ public class CursoController {
 		
 		em.getTransaction().begin();
 		
-		Curso curso = cursoDAO.getById(id);
+		Curso curso = cursoDAO.getByIdDAO(id);
 		
 		em.getTransaction().commit();
 		em.close();
@@ -89,8 +89,9 @@ public class CursoController {
 	
 	}
 	
-	// -- Edite
+// -- Update
 	
-	// -- Alter
+	
+// -- Delete
 
 }

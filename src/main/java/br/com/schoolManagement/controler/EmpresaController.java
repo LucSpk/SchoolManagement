@@ -1,6 +1,5 @@
 package br.com.schoolManagement.controler;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -72,15 +71,9 @@ public class EmpresaController {
 		EntityManager em = JpaUtil.getEntityManager();
 		EmpresaDAO empresaDAO = new EmpresaDAO(em);
 		
-		List<Unidade> unidades = new ArrayList<>();
+		Empresa empresa = empresaDAO.getByIdDAO(empresa_id);
 		
-		em.getTransaction().begin();
-		
-		unidades = empresaDAO.findUnidadeByEmpresaIdDAO(empresa_id);
-		
-		em.getTransaction().commit();
-		em.close();
-		JpaUtil.closeEntityManagerFactory();
+		List<Unidade> unidades = empresa.getUnidades();
 		
 		return unidades;
 	}
@@ -99,7 +92,6 @@ public class EmpresaController {
 		em.getTransaction().commit();
 		em.close();
 		JpaUtil.closeEntityManagerFactory();
-		
 	}
 
 // -- Delete
