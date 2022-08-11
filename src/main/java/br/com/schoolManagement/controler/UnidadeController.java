@@ -66,21 +66,21 @@ public class UnidadeController {
 	
 // -- Read
 	
-	public static Unidade getById(long id) {
+	public static Unidade getById(long unidade_id) {
 		EntityManager em = JpaUtil.getEntityManager();
 		UnidadeDAO unidadeDAO = new UnidadeDAO(em);
 		
 		em.getTransaction().begin();
 		
-		Unidade unidade = unidadeDAO.getByIdDAO(id);
+		Unidade unidade = unidadeDAO.getByIdDAO(unidade_id);
 		
 		em.getTransaction().commit();
 		em.close();
-		JpaUtil.closeEntityManagerFactory();
+		//JpaUtil.closeEntityManagerFactory();
 	
 		return unidade;
 	}
-	public static List<Unidade> getUnidades() {
+	public static List<Unidade> getALL() {
 		EntityManager em = JpaUtil.getEntityManager();
 		UnidadeDAO unidadeDAO = new UnidadeDAO(em);
 		
@@ -94,7 +94,7 @@ public class UnidadeController {
 	
 		return unidades;
 	}
-	public static Empresa getEmpresa(long unidade_id) {
+	public static Empresa getEmpresaByUnidadeId(long unidade_id) {
 		EntityManager em = JpaUtil.getEntityManager();
 		UnidadeDAO unidadeDAO = new UnidadeDAO(em);
 		
@@ -110,13 +110,56 @@ public class UnidadeController {
 		
 		return empresa;
 	}
-	
-	public static List<Curso> getCursosByUnidade() {
-		return null;
+	public static List<Curso> getCursosByUnidadeId(long unidade_id) {
+		EntityManager em = JpaUtil.getEntityManager();
+		UnidadeDAO unidadeDAO = new UnidadeDAO(em);
+
+		Unidade unidade = unidadeDAO.getByIdDAO(unidade_id);
+		
+		List<Curso> cursos = unidade.getCursos();
+		return cursos;
 	}
 	
 // -- Update
 	
+	public static void update(long unidade_id, Unidade unidadeNew) {
+		EntityManager em = JpaUtil.getEntityManager();
+		UnidadeDAO unidadeDAO = new UnidadeDAO(em);
+		
+		Unidade unidadeOld = getById(unidade_id);
+		
+		System.out.println(em.isOpen());
+		
+		em.getTransaction().begin();
+		
+		unidadeDAO.updateDAO(unidadeOld.getId(), unidadeNew);
+		
+		em.getTransaction().commit();
+		em.close();
+		JpaUtil.closeEntityManagerFactory();
+	
+	}
 // -- Delete
+	
+	public static void deleteByID(long unidade_id) {
+		EntityManager em = JpaUtil.getEntityManager();
+		UnidadeDAO unidadeDAO = new UnidadeDAO(em);
+		
+		Unidade unidade = getById(unidade_id);
+		
+		em.getTransaction().begin();
+		
+		unidadeDAO.removerDAO(unidade);
+		
+		em.getTransaction().commit();
+		em.close();
+		JpaUtil.closeEntityManagerFactory();
+	}
+	public static void deleteAll() {	
+		List<Unidade> unidades = getALL();
+		
+		for(Unidade unidade : unidades)
+			deleteByID(unidade.getId());
+	}
 
 }

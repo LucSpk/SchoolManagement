@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 import br.com.schoolManagement.model.Curso;
-import br.com.schoolManagement.model.Empresa;
 import br.com.schoolManagement.model.Unidade;
 
 public class UnidadeDAO {
@@ -40,15 +39,22 @@ public class UnidadeDAO {
         		.getResultList();
 	}
 	
-	public Empresa getEmpresa(long id) {
-		return null;
-	}
-	
 // -- Update	
 
+	public void updateDAO(long id, Unidade unidade) {
+		String query = "UPDATE Unidade u "
+				+ "SET u.nome = :name "
+				+ "WHERE u.id = :id";
+		this.em
+			.createQuery(query)
+			.setParameter("name", unidade.getNome())
+			.setParameter("id", id)
+			.executeUpdate();	
+	}
+	
 // -- Delete	
 
-	public void remover(Unidade unidade) {
+	public void removerDAO(Unidade unidade) {
 		this.em.remove(this.em.merge(unidade));
 	}
 }

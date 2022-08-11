@@ -98,11 +98,10 @@ public class Curso {
 	}
 	public void setAluno(Aluno aluno) {
 		this.alunos.add(aluno);	
-	}
-	
+	}	
 	
 	@Override
 	public String toString() {
-		return  "Id: " + getId() + ", Name: " + getNome() + ", Unidade: " + getUnidades() ;
+		return  "Id: " + getId() + ", Name: " + getNome() + ", Unidade: " + getUnidades() + "\n";
 	}
 }

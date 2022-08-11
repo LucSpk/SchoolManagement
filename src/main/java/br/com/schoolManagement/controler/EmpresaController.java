@@ -51,7 +51,6 @@ public class EmpresaController {
 		
 		em.getTransaction().commit();
 		em.close();
-		JpaUtil.closeEntityManagerFactory();
 		
 		return empresa;
 	}

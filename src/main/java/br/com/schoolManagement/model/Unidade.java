@@ -44,6 +44,10 @@ public class Unidade {
 		
 	}
 	
+	public Unidade(String nome) {
+		super();
+		this.nome = nome;
+	}
 	public Unidade(String nome, Endereco endereco) {
 		super();
 		this.nome = nome;

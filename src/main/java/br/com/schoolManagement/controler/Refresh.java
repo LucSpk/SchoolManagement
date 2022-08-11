@@ -12,5 +12,6 @@ public class Refresh {
 		
 		em.getTransaction().commit();
 		em.close();
+		JpaUtil.closeEntityManagerFactory();
 	}
 }
