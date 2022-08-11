@@ -23,7 +23,7 @@ public class Empresa {
 	@Column(nullable = false)
 	private String nome;
 	
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
 	private String cnpj;
 	
 	@OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
@@ -72,6 +72,7 @@ public class Empresa {
 		this.unidades = unidades;
 	}
 	public void setUnidade(Unidade unidade) {
+		unidade.setEmpresa(this);
 		this.unidades.add(unidade);
 	}
 		

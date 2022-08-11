@@ -20,53 +20,56 @@ public class EmpresaController {
 		
 		em.getTransaction().begin();
 		
-		empresaDAO.cadastrar(empresa);
+		empresaDAO.cadastrarDAO(empresa);
 		
 		em.getTransaction().commit();
 		em.close();
+		JpaUtil.closeEntityManagerFactory();
 	}
-	
 	public static void createMany(List<Empresa> empresas) {		
 		for(Empresa empresa : empresas) 
 			create(empresa);
 	}
-	
-	public static void createAndUnidades(Empresa empresa, List<Unidade> unidades) {
+	public static void createAndUnidade(Empresa empresa, Unidade unidade) {
+		empresa.setUnidade(unidade);
+		create(empresa);
+	}
+	public static void createAndManyUnidades(Empresa empresa, List<Unidade> unidades) {
 		empresa.setUnidades(unidades);
 		create(empresa);
 	}
 	
 // -- Read
 	
+	public static Empresa getById(long empresa_id) {
+		EntityManager em = JpaUtil.getEntityManager();
+		EmpresaDAO empresaDAO = new EmpresaDAO(em);
+		
+		em.getTransaction().begin();
+		
+		Empresa empresa = empresaDAO.getByIdDAO(empresa_id);
+		
+		em.getTransaction().commit();
+		em.close();
+		JpaUtil.closeEntityManagerFactory();
+		
+		return empresa;
+	}
 	public static List<Empresa> getAll() {
 		EntityManager em = JpaUtil.getEntityManager();
 		EmpresaDAO empresaDAO = new EmpresaDAO(em);
 		
 		em.getTransaction().begin();
 		
-		List<Empresa> empresas = empresaDAO.findAll();
+		List<Empresa> empresas = empresaDAO.findAllDAO();
 		
 		em.getTransaction().commit();
 		em.close();
+		JpaUtil.closeEntityManagerFactory();
 		
 		return empresas;
 	}
-	
-	public static Empresa getById(long id) {
-		EntityManager em = JpaUtil.getEntityManager();
-		EmpresaDAO empresaDAO = new EmpresaDAO(em);
-		
-		em.getTransaction().begin();
-		
-		Empresa empresa = empresaDAO.getById(id);
-		
-		em.getTransaction().commit();
-		em.close();
-	
-		return empresa;
-	}
-	
-	public static List<Unidade> getUnidadesByEmpresaId(long id) {
+	public static List<Unidade> getUnidadesByEmpresaId(long empresa_id) {
 		EntityManager em = JpaUtil.getEntityManager();
 		EmpresaDAO empresaDAO = new EmpresaDAO(em);
 		
@@ -74,15 +77,54 @@ public class EmpresaController {
 		
 		em.getTransaction().begin();
 		
-		unidades = empresaDAO.findUnidadeByEmpresaId(id);
+		unidades = empresaDAO.findUnidadeByEmpresaIdDAO(empresa_id);
 		
 		em.getTransaction().commit();
 		em.close();
+		JpaUtil.closeEntityManagerFactory();
 		
 		return unidades;
 	}
 	
-// -- Edit
+// -- update
+	
+	public static void update(long id, Empresa empresaNew) {
+		EntityManager em = JpaUtil.getEntityManager();
+		EmpresaDAO empresaDAO = new EmpresaDAO(em);
+		Empresa empresaOld = getById(id);
+		
+		em.getTransaction().begin();
+		
+		empresaDAO.updateDAO(empresaOld.getId(), empresaNew);
+		
+		em.getTransaction().commit();
+		em.close();
+		JpaUtil.closeEntityManagerFactory();
+		
+	}
 
-// -- Delete	
+// -- Delete
+	
+	public static void deleteByID(long empresa_id) {
+		EntityManager em = JpaUtil.getEntityManager();
+		EmpresaDAO empresaDAO = new EmpresaDAO(em);
+		
+		Empresa empresa = getById(empresa_id);
+		
+		em.getTransaction().begin();
+		
+		empresaDAO.removerDAO(empresa);
+		
+		em.getTransaction().commit();
+		em.close();
+		JpaUtil.closeEntityManagerFactory();
+	}
+	public static void deleteAll() {	
+		List<Empresa> empresas = getAll();
+		
+		for(Empresa empresa : empresas)
+			deleteByID(empresa.getId());
+	}
+
+	
 }

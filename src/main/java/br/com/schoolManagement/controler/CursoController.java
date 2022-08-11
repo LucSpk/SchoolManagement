@@ -21,7 +21,7 @@ public class CursoController {
 		UnidadeDAO unidadeDAO = new UnidadeDAO(em);
 		CursoDAO cursoDAO = new CursoDAO(em);
 		
-		Unidade unidade = unidadeDAO.getById(unidade_id);
+		Unidade unidade = unidadeDAO.getByIdDAO(unidade_id);
 		
 		curso.setUnidade(unidade);
 		

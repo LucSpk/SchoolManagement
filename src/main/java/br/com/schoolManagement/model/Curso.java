@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -24,7 +25,8 @@ public class Curso {
 	@Column(nullable = false)
 	private String nome;
 	
-	@ManyToMany(mappedBy = "cursos", cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "referencia_curso")
 	private List<Unidade> unidades = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "curso")
@@ -35,6 +37,11 @@ public class Curso {
 	
 	public Curso() {
 		// TODO Auto-generated constructor stub
+	}
+	
+	public Curso(String nome) {
+		super();
+		this.nome = nome;
 	}
 	
 	public Curso(String nome, Unidade unidade) {
