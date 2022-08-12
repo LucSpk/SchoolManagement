@@ -23,7 +23,7 @@ public class DisciplinaDAO {
 // -- Read
 	
 	@SuppressWarnings("unchecked")
-	public List<Disciplina> findAll() {
+	public List<Disciplina> findAllDAO() {
         String query = "select d From Disciplina d";
         return this.em.createQuery(query).getResultList();
     }
@@ -46,7 +46,7 @@ public class DisciplinaDAO {
 	
 // -- Delete
 
-	public void remover(Disciplina disciplina) {
+	public void removerDAO(Disciplina disciplina) {
 		this.em.remove(this.em.merge(disciplina));
 	}
 

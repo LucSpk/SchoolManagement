@@ -72,4 +72,9 @@ public class Periodo {
 	public void setAluno(Aluno aluno) {
 		this.alunos.add(aluno);
 	}
+	
+	@Override
+	public String toString() {
+		return getNome();
+	}
 }

@@ -48,7 +48,7 @@ public class AlunoDAO {
 	
 // -- Delete	
 
-	public void remover(Aluno aluno) {
+	public void removerDAO(Aluno aluno) {
 		this.em.remove(this.em.merge(aluno));
 	}
 

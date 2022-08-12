@@ -37,7 +37,7 @@ public class Unidade {
 	@ManyToMany(mappedBy = "unidades", cascade = CascadeType.ALL)
 	private List<Curso> cursos = new ArrayList<>();
 	
-	@ManyToMany
+	@ManyToMany(mappedBy = "unidades")
 	private List<Professor> professores = new ArrayList<>();
 	
 	public Unidade() {

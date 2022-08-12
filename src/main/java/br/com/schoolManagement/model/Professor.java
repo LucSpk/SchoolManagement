@@ -1,5 +1,6 @@
 package br.com.schoolManagement.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -23,8 +24,8 @@ public class Professor {
 	@Column(nullable = false)
 	private String nome;
 	
-	@ManyToMany(mappedBy = "professores", cascade = CascadeType.ALL)
-	private List<Unidade> unidades;
+	@ManyToMany(cascade = CascadeType.ALL)
+	private List<Unidade> unidades = new ArrayList<>();
 	
 	@OneToOne(mappedBy = "professor")
 	private Disciplina disciplina;

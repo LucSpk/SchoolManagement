@@ -23,7 +23,7 @@ public class EmpresaController {
 		
 		em.getTransaction().commit();
 		em.close();
-		JpaUtil.closeEntityManagerFactory();
+		
 	}
 	public static void createMany(List<Empresa> empresas) {		
 		for(Empresa empresa : empresas) 
@@ -63,7 +63,6 @@ public class EmpresaController {
 		
 		em.getTransaction().commit();
 		em.close();
-		JpaUtil.closeEntityManagerFactory();
 		
 		return empresas;
 	}
@@ -73,7 +72,12 @@ public class EmpresaController {
 		
 		Empresa empresa = empresaDAO.getByIdDAO(empresa_id);
 		
-		List<Unidade> unidades = empresa.getUnidades();
+		em.getTransaction().begin();
+		
+		List<Unidade> unidades = empresaDAO.getUnidadesDAO(empresa.getId());
+		
+		em.getTransaction().commit();
+		em.close();
 		
 		return unidades;
 	}
@@ -91,7 +95,6 @@ public class EmpresaController {
 		
 		em.getTransaction().commit();
 		em.close();
-		JpaUtil.closeEntityManagerFactory();
 	}
 
 // -- Delete
@@ -108,7 +111,7 @@ public class EmpresaController {
 		
 		em.getTransaction().commit();
 		em.close();
-		JpaUtil.closeEntityManagerFactory();
+
 	}
 	public static void deleteAll() {	
 		List<Empresa> empresas = getAll();

@@ -16,7 +16,7 @@ public class CursoDAO {
 	
 // -- Creat	
 
-	public void cadastrar(Curso curso) {
+	public void cadastrarDAO(Curso curso) {
 		this.em.persist(curso);
 	}
 		
@@ -46,7 +46,7 @@ public class CursoDAO {
 	
 // -- Delete	
 
-	public void remover(Curso curso) {
+	public void removerDAO(Curso curso) {
 		this.em.remove(this.em.merge(curso));
 	}
 

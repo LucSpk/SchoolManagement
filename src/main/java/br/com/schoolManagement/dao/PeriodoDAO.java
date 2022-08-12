@@ -16,13 +16,13 @@ public class PeriodoDAO {
 	
 // -- Creat	
 
-	public void cadastrar(Periodo periodo) {
+	public void cadastrarDAO(Periodo periodo) {
 		this.em.persist(periodo);
 	}
 	
 // -- Reade	
 	
-	public Periodo getById(long id) {
+	public Periodo getByIdDAO(long id) {
 		return em.find(Periodo.class, id);
 	}
 	@SuppressWarnings("unchecked")
@@ -46,7 +46,7 @@ public class PeriodoDAO {
 	
 // -- Delete	
 
-	public void remover(Periodo periodo) {
+	public void removerDAO(Periodo periodo) {
 		this.em.remove(this.em.merge(periodo));
 	}
 	

@@ -16,17 +16,17 @@ private EntityManager em;
 
 // -- Creat	
 
-	public void cadastrar(Professor professor) {
+	public void cadastrarDAO(Professor professor) {
 		this.em.persist(professor);
 	}
 	
 // -- Read	
 
-	public Professor getById(long id) {
+	public Professor getByIdDAO(long id) {
 		return em.find(Professor.class, id);
 	}
 	@SuppressWarnings("unchecked")
-	public List<Professor> findAll(){
+	public List<Professor> findAllDAO(){
 		String query = "select p From Professor p";
 		return this.em.createQuery(query).getResultList();
 	}
@@ -46,7 +46,7 @@ private EntityManager em;
 	
 // -- Delete	
 
-	public void remover(Professor professor) {
+	public void removerDAO(Professor professor) {
 		this.em.remove(this.em.merge(professor));
 	}
 	

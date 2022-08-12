@@ -30,7 +30,7 @@ public class UnidadeDAO {
 		String query = "select u From Unidade u";
 		return this.em.createQuery(query).getResultList();
 	}
-	
+
 // -- Update	
 
 	public void updateDAO(long id, Unidade unidade) {

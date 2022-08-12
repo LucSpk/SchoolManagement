@@ -24,7 +24,6 @@ public class AlunoController {
 		em.getTransaction().commit();
 		em.close();
 	}
-	
 	public static void createMany(List<Aluno> alunos) {
 		for(Aluno aluno: alunos)
 			create(aluno);
@@ -32,7 +31,7 @@ public class AlunoController {
 	
 // -- Read
 
-	public static List<Aluno> getUnidades() {
+	public static List<Aluno> getAll() {
 		EntityManager em = JpaUtil.getEntityManager();
 		AlunoDAO alunoDAO = new AlunoDAO(em);
 		
@@ -45,7 +44,6 @@ public class AlunoController {
 	
 		return alunos;
 	}
-	
 	public static Aluno getById(long id) {
 		EntityManager em = JpaUtil.getEntityManager();
 		AlunoDAO alunoDAO = new AlunoDAO(em);
@@ -59,16 +57,48 @@ public class AlunoController {
 	
 		return aluno;
 	}
-	
-	public static void getCursosByUnidade() {
-		
+	public static void getCursosByUnidade() {	
 	}
 	
 	public static void getEmpresa() {
 	
 	}
 		
-// -- Edit
+// -- Update
+	
+	public static void update(long aluno_id, Aluno alunoNew) {
+		EntityManager em = JpaUtil.getEntityManager();
+		AlunoDAO alunoDAO = new AlunoDAO(em);
 		
-// -- Delete	
+		em.getTransaction().begin();
+		
+		alunoDAO.updateDAO(aluno_id, alunoNew);
+		
+		em.getTransaction().commit();
+		em.close();
+		JpaUtil.closeEntityManagerFactory();
+	}
+	
+// -- Delete
+	
+	public static void deleteByID(long aluno_id) {
+		EntityManager em = JpaUtil.getEntityManager();
+		AlunoDAO alunoDAO = new AlunoDAO(em);
+		
+		Aluno aluno = getById(aluno_id);
+		
+		em.getTransaction().begin();
+		
+		alunoDAO.removerDAO(aluno);
+		
+		em.getTransaction().commit();
+		em.close();
+		JpaUtil.closeEntityManagerFactory();
+	}
+	public static void deleteAll() {	
+		List<Aluno> alunos = getAll();
+		
+		for(Aluno auno : alunos)
+			deleteByID(auno.getId());
+	}
 }

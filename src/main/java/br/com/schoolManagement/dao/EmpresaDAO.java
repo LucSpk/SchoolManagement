@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 import br.com.schoolManagement.model.Empresa;
+import br.com.schoolManagement.model.Unidade;
 
 public class EmpresaDAO {
 	
@@ -28,9 +29,14 @@ public class EmpresaDAO {
 	}
 	@SuppressWarnings("unchecked")
 	public List<Empresa> findAllDAO(){
-		String query = "select e From Empresa e";
+		String query = "SELECT e FROM Empresa e";
 		return this.em.createQuery(query).getResultList();
-	}	
+	}
+	@SuppressWarnings("unchecked")
+	public List<Unidade> getUnidadesDAO(long empresa_id) {
+		String query = "SELECT e.unidades FROM Empresa e WHERE e.id = :id";
+		return this.em.createQuery(query).setParameter("id", empresa_id).getResultList();
+	}
 	
 // -- Update
 	

@@ -8,7 +8,6 @@ import br.com.schoolManagement.dao.CursoDAO;
 import br.com.schoolManagement.dao.UnidadeDAO;
 import br.com.schoolManagement.model.Curso;
 import br.com.schoolManagement.model.Disciplina;
-import br.com.schoolManagement.model.Periodo;
 import br.com.schoolManagement.model.Unidade;
 import br.com.schoolManagement.utils.JpaUtil;
 
@@ -27,45 +26,30 @@ public class CursoController {
 		
 		em.getTransaction().begin();
 		
-		cursoDAO.cadastrar(curso);
+		cursoDAO.cadastrarDAO(curso);
 		
 		em.getTransaction().commit();
 		em.close();
 	}
-	
 	public static void createMany(long unidade_id, List<Curso> cursos) {
 		for(Curso curso: cursos)
 			create(unidade_id, curso);
 	}
-	
-	public static void createCursoAndDisciplinas(long unidade_id, Curso curso, List<Disciplina> disciplinas) {
+	public static void createCursoAndManyDisciplinas(long unidade_id, Curso curso, List<Disciplina> disciplinas) {
 		curso.setDisciplinas(disciplinas);
 		create(unidade_id, curso);
 	}
-	
-	public static void createDisciplina(long curso_id, Disciplina disciplina) {	
+	public static void createDisciplina(long curso_id, long unidade_id, Disciplina disciplina) {	
+		Curso curso = getById(curso_id);
+		curso.setDisciplina(disciplina);
 		
+		create(unidade_id, curso);
 	}
-	
-	public static void createManyDisciplinas(long curso_id, List<Periodo> periodos) {	
+	public static void createManyDisciplinas(long curso_id, List<Disciplina> disciplinas) {	
 
 	}
 	
 // -- Reade
-	
-	public static List<Curso> getCursos() {
-		EntityManager em = JpaUtil.getEntityManager();
-		CursoDAO cursoDAO = new CursoDAO(em);
-		
-		em.getTransaction().begin();
-		
-		List<Curso> cursos = cursoDAO.findAllDAO();
-		
-		em.getTransaction().commit();
-		em.close();
-		
-		return cursos;
-	}
 	
 	public static Curso getById(long id) {
 		EntityManager em = JpaUtil.getEntityManager();
@@ -80,7 +64,19 @@ public class CursoController {
 	
 		return curso;
 	}
-	
+	public static List<Curso> getAll() {
+		EntityManager em = JpaUtil.getEntityManager();
+		CursoDAO cursoDAO = new CursoDAO(em);
+		
+		em.getTransaction().begin();
+		
+		List<Curso> cursos = cursoDAO.findAllDAO();
+		
+		em.getTransaction().commit();
+		em.close();
+		
+		return cursos;
+	}
 	public static void getPeriodoByCurso() {
 		
 	}
@@ -91,7 +87,42 @@ public class CursoController {
 	
 // -- Update
 	
+	public static void update(long curso_id, Curso cursoNew) {
+		EntityManager em = JpaUtil.getEntityManager();
+		CursoDAO cursoDAO = new CursoDAO(em);
+		
+		em.getTransaction().begin();
+		
+		cursoDAO.updateDAO(curso_id, cursoNew);
+		
+		em.getTransaction().commit();
+		em.close();
+		JpaUtil.closeEntityManagerFactory();
+	
+	}
 	
 // -- Delete
+	
+
+	public static void deleteByID(long curso_id) {
+		EntityManager em = JpaUtil.getEntityManager();
+		CursoDAO cursoDAO = new CursoDAO(em);
+		
+		Curso curso = getById(curso_id);
+		
+		em.getTransaction().begin();
+		
+		cursoDAO.removerDAO(curso);
+		
+		em.getTransaction().commit();
+		em.close();
+		JpaUtil.closeEntityManagerFactory();
+	}
+	public static void deleteAll() {	
+		List<Curso> cursos = getAll();
+		
+		for(Curso curso : cursos)
+			deleteByID(curso.getId());
+	}
 
 }
