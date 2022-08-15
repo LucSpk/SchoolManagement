@@ -9,9 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -22,38 +22,25 @@ public class Unidade {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
 	@Column(length = 255, nullable = false)
 	private String nome;
 	
-	@ManyToOne()
-	@JoinColumn(name = "empresa_id")
+	@ManyToOne
 	private Empresa empresa;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "endereco_id")
 	private Endereco endereco;
 	
-	@ManyToMany(mappedBy = "unidades", cascade = CascadeType.ALL)
-	private List<Curso> cursos = new ArrayList<>();
+	@OneToMany(mappedBy = "unidade")
+	private List<ReferenciaDoCurso> referenciaDoCursos = new ArrayList<>();
 	
-	@ManyToMany(mappedBy = "unidades")
+	@ManyToMany(cascade = CascadeType.ALL)
 	private List<Professor> professores = new ArrayList<>();
 	
 	public Unidade() {
 		
 	}
-	
-	public Unidade(String nome) {
-		super();
-		this.nome = nome;
-	}
-	public Unidade(String nome, Endereco endereco) {
-		super();
-		this.nome = nome;
-		this.endereco = endereco;
-	}
-	
+
 	public Unidade(String nome, Endereco endereco, Empresa empresa) {
 		super();
 		this.nome = nome;
@@ -89,14 +76,14 @@ public class Unidade {
 		this.endereco = endereco;
 	}
 	
-	public List<Curso> getCursos() {
-		return cursos;
+	public List<ReferenciaDoCurso> getCursos() {
+		return referenciaDoCursos;
 	}
-	public void setCursos(List<Curso> cursos) {	
-		this.cursos = cursos;
+	public void setCursos(List<ReferenciaDoCurso> cursos) {	
+		this.referenciaDoCursos = cursos;
 	}
-	public void setCurso(Curso curso) {
-		this.cursos.add(curso);
+	public void setCurso(ReferenciaDoCurso curso) {
+		this.referenciaDoCursos.add(curso);
 	}
 	
 	public List<Professor> getProfessores() {
@@ -113,5 +100,5 @@ public class Unidade {
 	public String toString() {
 		return  "Id: " + getId() + ", Name: " + getNome() + ", Empresa: " + getEmpresa().getNome() ;
 	}
-	
+
 }

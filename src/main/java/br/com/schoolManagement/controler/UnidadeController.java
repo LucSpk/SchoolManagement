@@ -6,7 +6,6 @@ import javax.persistence.EntityManager;
 
 import br.com.schoolManagement.dao.EmpresaDAO;
 import br.com.schoolManagement.dao.UnidadeDAO;
-import br.com.schoolManagement.model.Curso;
 import br.com.schoolManagement.model.Empresa;
 import br.com.schoolManagement.model.Endereco;
 import br.com.schoolManagement.model.Professor;
@@ -38,6 +37,7 @@ public class UnidadeController {
 		for(Unidade unidade: unidades) 
 			create(empresa_id, unidade);	
 	}
+	/*
 	public static void createUnidadeAndCurso(long empresa_id, Unidade unidade, Curso curso) {	
 		unidade.setCurso(curso);
 		create(empresa_id, unidade);
@@ -56,6 +56,7 @@ public class UnidadeController {
 		for(Curso curso: cursos) 
 			createCurso(unidade_id, curso);
 	}
+	*/
 	
 // -- Read
 	
@@ -104,7 +105,7 @@ public class UnidadeController {
 		Endereco endereco = unidade.getEndereco();
 		
 		return endereco;
-	}
+	}/*
 	public static List<Curso> getCursosByUnidadeId(long unidade_id) {
 		EntityManager em = JpaUtil.getEntityManager();
 		UnidadeDAO unidadeDAO = new UnidadeDAO(em);
@@ -114,7 +115,7 @@ public class UnidadeController {
 		List<Curso> cursos = unidade.getCursos();
 		
 		return cursos;
-	}
+	}*/
 	public static List<Professor> getProfessorByUnidadeId(long unidade_id) {
 		EntityManager em = JpaUtil.getEntityManager();
 		UnidadeDAO unidadeDAO = new UnidadeDAO(em);

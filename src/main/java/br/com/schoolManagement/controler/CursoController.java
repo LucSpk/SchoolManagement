@@ -7,7 +7,6 @@ import javax.persistence.EntityManager;
 import br.com.schoolManagement.dao.CursoDAO;
 import br.com.schoolManagement.dao.UnidadeDAO;
 import br.com.schoolManagement.model.Curso;
-import br.com.schoolManagement.model.Disciplina;
 import br.com.schoolManagement.model.Unidade;
 import br.com.schoolManagement.utils.JpaUtil;
 
@@ -22,7 +21,7 @@ public class CursoController {
 		
 		Unidade unidade = unidadeDAO.getByIdDAO(unidade_id);
 		
-		curso.setUnidade(unidade);
+		//curso.setUnidade(unidade);
 		
 		em.getTransaction().begin();
 		
@@ -35,6 +34,7 @@ public class CursoController {
 		for(Curso curso: cursos)
 			create(unidade_id, curso);
 	}
+	/*
 	public static void createCursoAndManyDisciplinas(long unidade_id, Curso curso, List<Disciplina> disciplinas) {
 		curso.setDisciplinas(disciplinas);
 		create(unidade_id, curso);
@@ -48,6 +48,7 @@ public class CursoController {
 	public static void createManyDisciplinas(long curso_id, List<Disciplina> disciplinas) {	
 
 	}
+	*/
 	
 // -- Reade
 	

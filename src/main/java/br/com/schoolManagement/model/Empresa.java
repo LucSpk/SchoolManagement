@@ -19,14 +19,12 @@ public class Empresa {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
 	@Column(nullable = false)
 	private String nome;
-	
 	@Column(nullable = false, unique = true)
 	private String cnpj;
 	
-	@OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "empresa",cascade = CascadeType.ALL)
 	private List<Unidade> unidades = new ArrayList<>() ;
 	
 	public Empresa() {

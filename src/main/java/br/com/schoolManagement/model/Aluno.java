@@ -1,5 +1,6 @@
 package br.com.schoolManagement.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -25,19 +26,27 @@ public class Aluno {
 	private String cpf;
 	
 	@ManyToMany
-	private List<Curso> cursos;
+	private List<ReferenciaDoCurso> referenciaDoCurso = new ArrayList<>();
 	
 	@ManyToMany
-	private List<Periodo> periodos;
+	private List<Periodo> periodos = new ArrayList<>();
 	
 	public Aluno() {
-		// TODO Auto-generated constructor stub
-	}
 
-	public Aluno(String nome, String cpf) {
+	}
+	
+	public Aluno(String nome, String cpf, ReferenciaDoCurso referenciaDoCurso) {
 		super();
 		this.nome = nome;
 		this.cpf = cpf;
+		this.referenciaDoCurso.add(referenciaDoCurso);
+	}
+	
+	public Aluno(String nome, String cpf, List<ReferenciaDoCurso> referenciaDoCurso) {
+		super();
+		this.nome = nome;
+		this.cpf = cpf;
+		this.referenciaDoCurso = referenciaDoCurso;
 	}
 
 	public Long getId() {
@@ -59,16 +68,6 @@ public class Aluno {
 	}
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
-	}
-
-	public List<Curso> getCursos() {
-		return cursos;
-	}
-	public void setCursos(List<Curso> cursos) {
-		this.cursos = cursos;
-	}
-	public void setCurso(Curso curso) {
-		this.cursos.add(curso);
 	}
 
 	public List<Periodo> getPeriodos() {

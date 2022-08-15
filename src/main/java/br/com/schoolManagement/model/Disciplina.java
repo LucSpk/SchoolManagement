@@ -16,7 +16,6 @@ public class Disciplina {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
 	@Column(nullable = false)
 	private String nome;
 	
@@ -31,15 +30,11 @@ public class Disciplina {
 	
 	public Disciplina() {	}
 	
-	public Disciplina(String nome) {
-		super();
-		this.nome = nome;
-	}
-	
-	public Disciplina(String nome, Curso curso) {
+	public Disciplina(String nome, Curso curso, Periodo periodo) {
 		super();
 		this.nome = nome;
 		this.curso = curso;
+		this.periodo = periodo;
 	}
 
 	public Long getId() {

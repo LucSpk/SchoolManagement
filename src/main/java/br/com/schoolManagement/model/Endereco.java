@@ -1,42 +1,34 @@
 package br.com.schoolManagement.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "enderecos_unidades")
+@Table(name = "enderecos_das_unidades")
 public class Endereco {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@OneToOne(mappedBy = "endereco", cascade = CascadeType.ALL)
-	@JoinColumn(name = "unidade_id")
+	@OneToOne(mappedBy = "endereco")
 	private Unidade unidade;
 	
 	@Column(length = 255, nullable = false)
 	private String logradouro;
-	
 	@Column(length = 15,nullable = false)
 	private String numero;
-	
 	@Column(length = 150,nullable = false)
 	private String bairro;
-	
 	@Column(length = 150, nullable = false)
 	private String cidade;
-	
 	@Column(length = 2, nullable = false)
 	private String estado;
-	
 	@Column(length = 10, nullable = false)
 	private String cep;
 	

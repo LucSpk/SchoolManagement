@@ -3,7 +3,6 @@ package br.com.schoolManagement.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,11 +19,10 @@ public class Professor {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
 	@Column(nullable = false)
 	private String nome;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(mappedBy = "professores")
 	private List<Unidade> unidades = new ArrayList<>();
 	
 	@OneToOne(mappedBy = "professor")
@@ -33,10 +31,18 @@ public class Professor {
 	public Professor() {
 		// TODO Auto-generated constructor stub
 	}
-
-	public Professor(String nome) {
+	
+	public Professor(String nome, List<Unidade> unidades, Disciplina disciplina) {
 		super();
 		this.nome = nome;
+		this.unidades = unidades;
+		this.disciplina = disciplina;
+	}
+	public Professor(String nome, Unidade unidade, Disciplina disciplina) {
+		super();
+		this.nome = nome;
+		this.unidades.add(unidade);
+		this.disciplina = disciplina;
 	}
 
 	public Long getId() {

@@ -6,7 +6,7 @@ import br.com.schoolManagement.utils.JpaUtil;
 
 public class Refresh {
 
-	public static void begin() {
+	public static void run() {
 		EntityManager em = JpaUtil.getEntityManager();
 		em.getTransaction().begin();
 		
