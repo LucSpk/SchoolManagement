@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import br.com.schoolManagement.model.Aluno;
 import br.com.schoolManagement.model.Curso;
 import br.com.schoolManagement.model.Professor;
 import br.com.schoolManagement.model.ReferenciaDoCurso;
@@ -35,6 +36,14 @@ private EntityManager em;
 	@SuppressWarnings("unchecked")
 	public List<Curso> findCursosDAO(long id) {
 		String query = "SELECT r FROM ReferenciaDoCurso r WHERE r.curso.id = :id";
+		return this.em
+			.createQuery(query)
+			.setParameter("id", id)
+			.getResultList();	
+	}
+	@SuppressWarnings("unchecked")
+	public List<Aluno> findAlunosDAO(long id) {
+		String query = "SELECT r FROM ReferenciaDoCurso r WHERE r.alunos.id = :id";
 		return this.em
 			.createQuery(query)
 			.setParameter("id", id)
